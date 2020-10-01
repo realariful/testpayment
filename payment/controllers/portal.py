@@ -64,7 +64,11 @@ class PaymentProcessing(http.Controller):
         _logger.info("payment_status_poll")
         # retrieve the transactions
         tx_ids_list = self.get_payment_transaction_ids()
-
+        _logger.info("tx_ids_list")
+        _logger.info(tx_ids_list)
+        _logger.info("SEARCH TIME")
+        _logger.info(str((datetime.now() - timedelta(days=1)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)) )
+        _logger.info(str(datetime.now()))
         payment_transaction_ids = request.env['payment.transaction'].sudo().search([
             ('id', 'in', list(tx_ids_list)),
             ('date', '>=', (datetime.now() - timedelta(days=1)).strftime(DEFAULT_SERVER_DATETIME_FORMAT)),
